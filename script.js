@@ -45,3 +45,17 @@ function Star() {
         ellipse(sx, sy, r, r);
     };
 }
+let words = ["Planet", "Star", "Galaxy", "Comet", "Asteroid"];
+let currentWordIndex = 0;
+let displayTime = 5000; // 5 seconds per word
+
+function showNextWord() {
+    let word = words[currentWordIndex];
+    document.getElementById('word-display').innerText = word;
+    currentWordIndex = (currentWordIndex + 1) % words.length;
+    setTimeout(showNextWord, displayTime);
+}
+
+window.onload = function() {
+    showNextWord();
+};
