@@ -12,7 +12,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black; /* Temporary background for visibility */
+    background-color: black;
 }
 
 #word-display {
@@ -20,7 +20,7 @@ body, html {
     color: white;
     font-size: 2em;
     text-align: center;
-    z-index: 2; /* Ensures it's above the starfield */
+    z-index: 2;
 }
 
 canvas#starfield {
@@ -29,4 +29,5 @@ canvas#starfield {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1; /* Explicitly set z-index for canvas */
 }
