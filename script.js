@@ -8,11 +8,13 @@ function setup() {
         stars[i] = new Star();
     }
     speed = 1;
+    console.log("Canvas initialized with size:", windowWidth, windowHeight); // Check canvas size
 }
 
 function draw() {
+    console.log("Draw function executing"); // Confirm draw function execution
     speed = map(mouseX, 0, width, 0, 50);
-    background(0);
+    background(255, 0, 0); // Temporarily change background color to red
     translate(width / 2, height / 2);
     for (let i = 0; i < stars.length; i++) {
         stars[i].update();
@@ -45,6 +47,7 @@ function Star() {
         ellipse(sx, sy, r, r);
     };
 }
+
 let words = ["Planet", "Star", "Galaxy", "Comet", "Asteroid"];
 let currentWordIndex = 0;
 let displayTime = 5000; // 5 seconds per word
