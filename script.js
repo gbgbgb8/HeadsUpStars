@@ -1,50 +1,57 @@
 let stars = [];
-let speed;
+let speed = 0.1;
+let wordContainer;
 
 function setup() {
-    let canvas = createCanvas(windowWidth, windowHeight);
-    canvas.parent('starfield');
-    speed = 1;
-    console.log("Canvas initialized with size:", windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
+  for (let i = 0; i < 100; i++) {
+    stars.push(new Star());
+  }
+  wordContainer = select('#wordContainer');
 }
 
 function draw() {
-    console.log("Draw function executing");
-    background(0); // Change back to black background
+  background(0);
+  stars.forEach(star => {
+    star.update();
+    star.show();
+  });
+  wordContainer.style('color', 'white');
+}
 
-    // Temporary: draw a fixed circle to test rendering
-    fill(255, 0, 0);
-    ellipse(width / 2, height / 2, 50, 50);
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
-    // Comment out the stars for now
-    /*
-    speed = map(mouseX, 0, width, 0, 50);
-    translate(width / 2, height / 2);
-    for (let i = 0; i < stars.length; i++) {
-        stars[i].update();
-        stars[i].show();
+class Star {
+    constructor() {
+      this.x = random(width);
+      this.y = random(height);
+      this.z = random(width);
+      this.pz = this.z;
     }
-    */
-}
-
-// Comment out the Star class for now
-/*
-function Star() {
-    // Star class definition
-}
-*/
-
-let words = ["Planet", "Star", "Galaxy", "Comet", "Asteroid"];
-let currentWordIndex = 0;
-let displayTime = 5000; // 5 seconds per word
-
-function showNextWord() {
-    let word = words[currentWordIndex];
-    document.getElementById('word-display').innerText = word;
-    currentWordIndex = (currentWordIndex + 1) % words.length;
-    setTimeout(showNextWord, displayTime);
-}
-
-window.onload = function() {
-    showNextWord();
-};
+  
+    update() {
+      if (this.z > 0) {
+        let tr = map(this.z, 0, width, 0.5, 0);
+        this.x -= speed * (this.x - mouseX) * tr;
+        this.y -= speed * (this.y - mouseY) * tr;
+        this.z -= speed * 5;
+        this.z = max(this.z, 0);
+      } else {
+        this.x = random(width);
+        this.y = random(height);
+        this.z = width;
+        this.pz = this.z;
+      }
+    }
+  
+    show() {
+      let sx = map(this.x / this.z, 0, 1, 0, width);
+      let sy = map(this.y / this.z, 0, 1, 0, height);
+      let r = map(this.z, 0, width, 2, 0);
+      noStroke();
+      fill(255);
+      ellipse(sx, sy, r, r);
+    }
+  }
