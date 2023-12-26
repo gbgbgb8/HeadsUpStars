@@ -7,7 +7,7 @@ let words = [];
 let currentWordIndex = 0;
 let currentWord;
 let wordChangeTimer;
-let timerDuration = 60000; // 60 seconds
+let timerDuration = 60000; 
 let timerStartTime;
 
 function preload() {
@@ -76,9 +76,9 @@ function changeWord() {
   currentWordIndex = (currentWordIndex + 1) % words.length;
   currentWord = words[currentWordIndex];
   wordContainer.html(currentWord);
-  timerStartTime = millis(); // Reset the timer
+  timerStartTime = millis(); 
   resetSpeed();
-  stars = []; // Reset star positions for a new hyperspace effect
+  stars = []; 
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
   }
