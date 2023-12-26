@@ -44,6 +44,9 @@ function draw() {
     star.update();
     star.show();
   });
+
+  // Display score and timer
+  displayScoreAndTimer();
 }
 
 function windowResized() {
@@ -109,15 +112,14 @@ function resetSpeed() {
 
 function increaseScore() {
   score++;
-  console.log("Score: " + score); 
 }
 
 function decreaseScore() {
   score--;
-  console.log("Score: " + score); 
 }
 
 function quitGame() {
+  clearInterval(wordChangeTimer);
   select('#game').style('display', 'none');
   select('#startScreen').style('display', 'flex');
   resetGame();
@@ -125,7 +127,17 @@ function quitGame() {
 
 function resetGame() {
   score = 0;
-  
+  currentWordIndex = 0;
+  wordContainer.html("");
+}
+
+function displayScoreAndTimer() {
+  fill(255);
+  textSize(32);
+  text('Score: ' + score, width / 2, 60);
+
+  let remainingTime = max(0, timerDuration - (millis() - timerStartTime));
+  text('Time: ' + nf(remainingTime / 1000, 0, 2), width - 200, 60);
 }
 
 function touchStarted() {
