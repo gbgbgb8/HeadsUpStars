@@ -22,13 +22,13 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none; /* Ensures canvas interaction is not blocked */
+    pointer-events: none;
   }
   
   #wordContainer {
     text-align: center;
     font-size: 2em;
     color: white;
-    pointer-events: auto; /* Allows interaction with the word container */
+    pointer-events: auto;
   }
   

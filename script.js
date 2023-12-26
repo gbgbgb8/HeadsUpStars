@@ -13,23 +13,18 @@ let timerStartTime;
 function preload() {
   loadJSON('words.json', function(data) {
     words = data.words;
-    startGame(); // Start the game after words are loaded
   });
 }
 
-function startGame() {
+function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 800; i++) {
-    stars.push(new Star());
-  }
   wordContainer = select('#wordContainer');
   changeWord();
   timerStartTime = millis();
   wordChangeTimer = setInterval(changeWord, timerDuration);
-}
-
-function setup() {
-  // Setup now only initializes the canvas, actual game start is in startGame()
+  for (let i = 0; i < 800; i++) {
+    stars.push(new Star());
+  }
 }
 
 function draw() {
@@ -41,9 +36,13 @@ function draw() {
   });
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function updateSpeed() {
   let timeElapsed = millis() - timerStartTime;
-  currentSpeed = map(timeElapsed, 0, timerDuration, baseSpeed, maxSpeed);
+  currentSpeed = map(timeElapsed, 0, timerDuration, baseSpeed, maxSpeed, true);
   currentSpeed = min(currentSpeed, maxSpeed);
 }
 
@@ -71,19 +70,22 @@ class Star {
 
     let sx = map(this.x / this.z, 0, 1, 0, width);
     let sy = map(this.y / this.z, 0, 1, 0, height);
-
     let r = map(this.z, 0, width, 16, 0);
+
     ellipse(sx, sy, r, r);
   }
 }
 
 function changeWord() {
-  if (words.length > 0) {
-    currentWordIndex = (currentWordIndex + 1) % words.length;
-    currentWord = words[currentWordIndex];
-    wordContainer.html(currentWord);
-    timerStartTime = millis(); // Reset the timer
-    resetSpeed();
+  currentWordIndex = (currentWordIndex + 1) % words.length;
+  currentWord = words[currentWordIndex];
+  wordContainer.html(currentWord);
+  timerStartTime = millis(); // Reset the timer
+  resetSpeed();
+  // Reset star positions for new hyperspace effect
+  stars = [];
+  for (let i = 0; i < 800; i++) {
+    stars.push(new Star());
   }
 }
 
@@ -93,14 +95,10 @@ function resetSpeed() {
 
 function mouseClicked() {
   changeWord();
-  clearInterval(wordChangeTimer);
-  wordChangeTimer = setInterval(changeWord, timerDuration);
 }
 
 function keyPressed() {
   if (key === ' ') {
     changeWord();
-    clearInterval(wordChangeTimer);
-    wordChangeTimer = setInterval(changeWord, timerDuration);
   }
 }
