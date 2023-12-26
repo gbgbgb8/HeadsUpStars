@@ -3,25 +3,31 @@ let baseSpeed = 0.1;
 let maxSpeed = 5;
 let currentSpeed = baseSpeed;
 let wordContainer;
+let allWords = {};
 let words = [];
 let currentWordIndex = 0;
 let currentWord;
 let wordChangeTimer;
-let timerDuration = 60000; 
+let timerDuration = 60000;
 let timerStartTime;
 
 function preload() {
   loadJSON('words.json', function(data) {
-    words = data.words;
+    allWords = data.words;
   });
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   wordContainer = select('#wordContainer');
-  changeWord();
-  timerStartTime = millis();
-  wordChangeTimer = setInterval(changeWord, timerDuration);
+
+  // Add event listeners to buttons
+  select('#easy').mousePressed(() => startGame('easy'));
+  select('#medium').mousePressed(() => startGame('medium'));
+  select('#difficult').mousePressed(() => startGame('difficult'));
+  select('#hard').mousePressed(() => startGame('hard'));
+  select('#actions').mousePressed(() => startGame('actions'));
+
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
   }
@@ -72,13 +78,22 @@ class Star {
   }
 }
 
+function startGame(difficulty) {
+  words = allWords[difficulty];
+  select('#startScreen').style('display', 'none');
+  select('#game').style('display', 'block');
+  changeWord();
+  timerStartTime = millis();
+  wordChangeTimer = setInterval(changeWord, timerDuration);
+}
+
 function changeWord() {
   currentWordIndex = (currentWordIndex + 1) % words.length;
   currentWord = words[currentWordIndex];
   wordContainer.html(currentWord);
   timerStartTime = millis(); 
   resetSpeed();
-  stars = []; 
+  stars = [];
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
   }

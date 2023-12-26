@@ -8,7 +8,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 <body>
-  <div id="game">
+  <div id="startScreen">
+    <h1>Heads-Up Charades</h1>
+    <button id="easy">Easy</button>
+    <button id="medium">Medium</button>
+    <button id="difficult">Difficult</button>
+    <button id="hard">Hard</button>
+    <button id="actions">Actions</button>
+  </div>
+  <div id="game" style="display: none;">
     <canvas id="starfield"></canvas>
     <div id="wordContainer"></div>
   </div>
