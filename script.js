@@ -13,10 +13,11 @@ let timerStartTime;
 function preload() {
   loadJSON('words.json', function(data) {
     words = data.words;
+    startGame(); // Start the game after words are loaded
   });
 }
 
-function setup() {
+function startGame() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
@@ -25,6 +26,10 @@ function setup() {
   changeWord();
   timerStartTime = millis();
   wordChangeTimer = setInterval(changeWord, timerDuration);
+}
+
+function setup() {
+  // Setup now only initializes the canvas, actual game start is in startGame()
 }
 
 function draw() {
