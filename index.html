@@ -4,132 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heads-Up Clone</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-    }
-    canvas {
-      display: block;
-    }
-    #game {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    #wordContainer {
-      text-align: center;
-      font-size: 2em;
-      color: white;
-    }
-  </style>
 </head>
 <body>
   <div id="game">
     <canvas id="starfield"></canvas>
     <div id="wordContainer"></div>
   </div>
-  <script>
-    let stars = [];
-    let baseSpeed = 0.1;
-    let maxSpeed = 5;
-    let acceleration = 0.005;
-    let currentSpeed = baseSpeed;
-    let wordContainer;
-    let words = ["apple", "banana", "cherry", "orange", "grape"];
-    let currentWordIndex = 0;
-    let currentWord;
-    let wordChangeTimer;
-    let timerDuration = 60000; // 60 seconds
-    let timerStartTime;
-
-    function setup() {
-      createCanvas(windowWidth, windowHeight);
-      for (let i = 0; i < 800; i++) {
-        stars.push(new Star());
-      }
-      wordContainer = select('#wordContainer');
-      changeWord();
-      timerStartTime = millis();
-      wordChangeTimer = setInterval(changeWord, timerDuration);
-    }
-
-    function draw() {
-      background(0);
-      updateSpeed();
-      stars.forEach(star => {
-        star.update();
-        star.show();
-      });
-    }
-
-    function updateSpeed() {
-      let timeElapsed = millis() - timerStartTime;
-      currentSpeed = map(timeElapsed, 0, timerDuration, baseSpeed, maxSpeed);
-      currentSpeed = min(currentSpeed, maxSpeed);
-    }
-
-    class Star {
-      constructor() {
-        this.x = random(-width, width);
-        this.y = random(-height, height);
-        this.z = random(width);
-        this.pz = this.z;
-      }
-
-      update() {
-        this.z -= currentSpeed;
-        if (this.z < 1) {
-          this.x = random(-width, width);
-          this.y = random(-height, height);
-          this.z = width;
-          this.pz = this.z;
-        }
-      }
-
-      show() {
-        fill(255);
-        noStroke();
-
-        let sx = map(this.x / this.z, 0, 1, 0, width);
-        let sy = map(this.y / this.z, 0, 1, 0, height);
-
-        let r = map(this.z, 0, width, 16, 0);
-        ellipse(sx, sy, r, r);
-      }
-    }
-
-    function changeWord() {
-      currentWordIndex = (currentWordIndex + 1) % words.length;
-      currentWord = words[currentWordIndex];
-      wordContainer.html(currentWord);
-      timerStartTime = millis(); // Reset the timer
-      resetSpeed();
-    }
-
-    function resetSpeed() {
-      currentSpeed = baseSpeed;
-    }
-
-    function mouseClicked() {
-      changeWord();
-      clearInterval(wordChangeTimer);
-      wordChangeTimer = setInterval(changeWord, timerDuration);
-    }
-
-    function keyPressed() {
-      if (key === ' ') {
-        changeWord();
-        clearInterval(wordChangeTimer);
-        wordChangeTimer = setInterval(changeWord, timerDuration);
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

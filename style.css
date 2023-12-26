@@ -1,0 +1,32 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+  }
+  
+  canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  #game {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Ensures canvas interaction is not blocked */
+  }
+  
+  #wordContainer {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    pointer-events: auto; /* Allows interaction with the word container */
+  }
+  
