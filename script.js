@@ -109,12 +109,12 @@ function resetSpeed() {
 
 function increaseScore() {
   score++;
-  console.log("Score: " + score); // Update to display on screen if needed
+  console.log("Score: " + score); 
 }
 
 function decreaseScore() {
   score--;
-  console.log("Score: " + score); // Update to display on screen if needed
+  console.log("Score: " + score); 
 }
 
 function quitGame() {
@@ -125,7 +125,7 @@ function quitGame() {
 
 function resetGame() {
   score = 0;
-  // Reset other game states as needed
+  
 }
 
 function touchStarted() {
