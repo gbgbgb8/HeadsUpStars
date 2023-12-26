@@ -1,15 +1,44 @@
 {
-    "words": [
-      "apple",
-      "banana",
-      "cherry",
-      "orange",
-      "grape",
-      "kiwi",
-      "melon",
-      "pear",
-      "peach",
-      "plum"
-    ]
+  "words": {
+      "easy": [
+          "lip",
+          "baseball",
+          "toothbrush",
+          "backpack",
+          "shoulder",
+          "finger"
+      ],
+      "medium": [
+          "trumpet",
+          "salute",
+          "headache",
+          "button",
+          "paddle",
+          "soap"
+      ],
+      "difficult": [
+          "owl",
+          "gingerbread man",
+          "rainbow",
+          "hook",
+          "softball",
+          "pet"
+      ],
+      "hard": [
+          "evolution",
+          "gratitude",
+          "negotiate",
+          "oil",
+          "lifestyle",
+          "level"
+      ],
+      "actions": [
+          "paddling in a canoe",
+          "operating a jackhammer",
+          "climbing Mount Everest",
+          "delivering mail",
+          "raking leaves",
+          "feeding the ducks"
+      ]
   }
-  
+}
