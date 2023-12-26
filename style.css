@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   background: black;
   overflow: hidden;
+  font-family: 'Press Start 2P', sans-serif;
 }
 
 canvas {
@@ -46,7 +47,6 @@ canvas {
   justify-content: center;
   height: 100%;
   color: white;
-  font-family: 'Press Start 2P', sans-serif;
 }
 
 #startScreen h1 {
@@ -61,4 +61,5 @@ canvas {
   color: white;
   border: none;
   cursor: pointer;
+  text-align: center;
 }
