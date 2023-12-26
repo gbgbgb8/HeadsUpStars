@@ -63,3 +63,34 @@ canvas {
   cursor: pointer;
   text-align: center;
 }
+
+.scoreButton {
+  position: absolute;
+  font-size: 3em; /* Large emoji size */
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+#thumbsUp {
+  top: 20px;
+  left: 20px;
+}
+
+#thumbsDown {
+  top: 20px;
+  right: 20px;
+}
+
+.quitButton {
+  position: absolute;
+  top: 20px;
+  font-size: 1em;
+  padding: 5px;
+  right: 50px; /* Adjust as needed */
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

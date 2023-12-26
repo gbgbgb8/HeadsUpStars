@@ -10,6 +10,7 @@ let currentWord;
 let wordChangeTimer;
 let timerDuration = 60000;
 let timerStartTime;
+let score = 0;
 
 function preload() {
   loadJSON('words.json', function(data) {
@@ -21,12 +22,15 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   wordContainer = select('#wordContainer');
 
-  // Add event listeners to buttons
   select('#easy').mousePressed(() => startGame('easy'));
   select('#medium').mousePressed(() => startGame('medium'));
   select('#difficult').mousePressed(() => startGame('difficult'));
   select('#hard').mousePressed(() => startGame('hard'));
   select('#actions').mousePressed(() => startGame('actions'));
+
+  select('#thumbsUp').mousePressed(increaseScore);
+  select('#thumbsDown').mousePressed(decreaseScore);
+  select('#quitButton').mousePressed(quitGame);
 
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
@@ -91,7 +95,7 @@ function changeWord() {
   currentWordIndex = (currentWordIndex + 1) % words.length;
   currentWord = words[currentWordIndex];
   wordContainer.html(currentWord);
-  timerStartTime = millis(); 
+  timerStartTime = millis();
   resetSpeed();
   stars = [];
   for (let i = 0; i < 800; i++) {
@@ -101,6 +105,27 @@ function changeWord() {
 
 function resetSpeed() {
   currentSpeed = baseSpeed;
+}
+
+function increaseScore() {
+  score++;
+  console.log("Score: " + score); // Update to display on screen if needed
+}
+
+function decreaseScore() {
+  score--;
+  console.log("Score: " + score); // Update to display on screen if needed
+}
+
+function quitGame() {
+  select('#game').style('display', 'none');
+  select('#startScreen').style('display', 'flex');
+  resetGame();
+}
+
+function resetGame() {
+  score = 0;
+  // Reset other game states as needed
 }
 
 function touchStarted() {
