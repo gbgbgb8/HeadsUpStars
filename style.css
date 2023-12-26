@@ -13,6 +13,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1; /* Lower z-index to ensure it's below the word container */
   }
   
   #game {
@@ -26,9 +27,14 @@ html, body {
   }
   
   #wordContainer {
+    position: absolute; /* Positioning context for z-index */
+    z-index: 2; /* Higher z-index to ensure it's above the canvas */
     text-align: center;
     font-size: 2em;
     color: white;
     pointer-events: auto;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Centering adjustment */
   }
   
